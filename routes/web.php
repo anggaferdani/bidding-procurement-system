@@ -15,6 +15,7 @@ use App\Http\Controllers\JajaranDireksiController;
 use App\Http\Controllers\JajaranKomisarisController;
 use App\Http\Controllers\ProfilePerusahaanController;
 use App\Http\Controllers\Eproc\AkunController as EprocAkunController;
+use App\Http\Controllers\PengadaanYangBenarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('cetak-pdf', [BeritaController::class, 'cetak_pdf'])->name('cetak-pdf');
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      Route::resource('pengadaan-yang-benar', PengadaanYangBenarController::class);
       Route::resource('barang', BarangController::class);
       Route::get('/pengadaan', [PengadaanController::class, 'index'])->name('pengadaan');
       Route::get('/pengadaan/{id}', [PengadaanController::class, 'detail_pengadaan'])->name('detail-pengadaan');
@@ -59,6 +61,7 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('cetak-pdf', [BeritaController::class, 'cetak_pdf'])->name('cetak-pdf');
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      Route::resource('pengadaan-yang-benar', PengadaanYangBenarController::class);
       Route::resource('barang', BarangController::class);
       Route::get('/pengadaan', [PengadaanController::class, 'index'])->name('pengadaan');
       Route::get('/pengadaan/{id}', [PengadaanController::class, 'detail_pengadaan'])->name('detail-pengadaan');

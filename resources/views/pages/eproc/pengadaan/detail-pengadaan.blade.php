@@ -16,7 +16,7 @@
       </div>
       <div class="card-body">
         <div class="profile-widget-name">Nama Barang :</div>
-        <p>{{ $pengadaan->barang_id }}</p>
+        <p>{{ $pengadaan->barangs->nama_barang }}</p>
         @if(auth()->user()->level == 'perusahaan')
         <form method="POST" action="{{ route('eproc.perusahaan.bid', ['id' => $pengadaan->id]) }}" class="needs-validation" novalidate="">
           @csrf
@@ -64,7 +64,7 @@
                 @if($history_pengadaans->status_aktif == 1)
                 <tr>
                   <td>{{ $id+1 }}</td>
-                  <td>{{ $history_pengadaans->user_id }}</td>
+                  <td>{{ $history_pengadaans->users->nama_panjang }}</td>
                   <td>{{ 'Rp. '.strrev(implode('.',str_split(strrev(strval($history_pengadaans->price_quotation)),3))) }}</td>
                   <td>{{ $history_pengadaans->created_at }}</td>
                 </tr>

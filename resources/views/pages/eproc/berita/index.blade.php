@@ -13,10 +13,6 @@
 </div>
 @endsection
 @section('content')
-<h2 class="section-title">Keterangan</h2>
-<p class="section-lead">
-  Semisal sehabis menambahkan data menggunakan import excel jika gambar thumbnailnya tidak muncul dapat ditambahkan secara manual dengan cara edit data
-</p>
 <div class="row">
   <div class="col-12">
     

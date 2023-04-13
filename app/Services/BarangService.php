@@ -29,18 +29,22 @@ class BarangService
           'nama_barang' => 'required',
           'jenis_barang' => 'required',
           'hps' => 'required',
+          'tanggal_mulai_pengadaan' => 'required',
+          'tanggal_akhir_pengadaan' => 'required',
         ]);
 
         $barang = $this->barang->create([
             'nama_barang' => $request->nama_barang,
             'jenis_barang' => $request->jenis_barang,
             'hps' => $request->hps,
+            'tanggal_mulai_pengadaan' => $request->tanggal_mulai_pengadaan,
+            'tanggal_akhir_pengadaan' => $request->tanggal_akhir_pengadaan,
         ]);
 
         $pengadaan = $this->pengadaan->create([
             'barang_id' => $barang->id,
             'user_id' => Auth::id(),
-            'status_pengadaan' => $request->status_pengadaan,
+            'status_pengadaan' => 1,
         ]);
 
         return $pengadaan;
@@ -58,12 +62,16 @@ class BarangService
           'nama_barang' => 'required',
           'jenis_barang' => 'required',
           'hps' => 'required',
+          'tanggal_mulai_pengadaan' => 'required',
+          'tanggal_akhir_pengadaan' => 'required',
         ]);
 
         $this->barang->find($id)->update([
             'nama_barang' => $request->nama_barang,
             'jenis_barang' => $request->jenis_barang,
             'hps' => $request->hps,
+            'tanggal_mulai_pengadaan' => $request->tanggal_mulai_pengadaan,
+            'tanggal_akhir_pengadaan' => $request->tanggal_akhir_pengadaan,
         ]);
 
         $pengadaan = $this->pengadaan->find($request->pengadaan_id)->update([

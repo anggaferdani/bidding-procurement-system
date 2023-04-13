@@ -1,17 +1,13 @@
 @extends('templates.eproc.pages')
 @section('title')
 @section('header')
-<h1>Management Pengadaan</h1>
+<h1>Management Pengadaan Barang</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Management Pengadaan</a></div>
+  <div class="breadcrumb-item active"><a href="#">Management Pengadaan Barang</a></div>
 </div>
 @endsection
 @section('content')
-<h2 class="section-title">Keterangan</h2>
-<p class="section-lead">
-  Label merah menandakan Admin, Label biru berarti menandakan Creator sedangkan untuk label berwarna kuning menandakan Helpdesk
-</p>
 <div class="row">
   <div class="col-12">
     
@@ -25,7 +21,7 @@
 
     <div class="card">
       <div class="card-header">
-        <h4>Management Pengadaan</h4>
+        <h4>Management Pengadaan Barang</h4>
       </div>
       <div class="card-body">
         <div class="float-left">
@@ -54,9 +50,9 @@
             <tbody>
               <tr>
                 <th>No</th>
-                <th>Nama Panjang</th>
-                <th>Email</th>
-                <th>Level</th>
+                <th>Nama Barang</th>
+                <th>Jenis Barang</th>
+                <th>HPS</th>
                 <th>Action</th>
               </tr>
               @foreach ($barang as $id => $barangs)
@@ -65,7 +61,7 @@
                   <td>{{ $id+1 }}</td>
                   <td>{{ $barangs->nama_barang }}</td>
                   <td>{{ $barangs->jenis_barang }}</td>
-                  <td>{{ $barangs->hps }}</td>
+                  <td>{{ 'Rp. '.strrev(implode('.',str_split(strrev(strval($barangs->hps)),3))) }}</td>
                   <td>
                     @if(auth()->user()->level == 1)
                       <form action="{{ route('eproc.superadmin.barang.destroy', $barangs->id) }}" method="POST">

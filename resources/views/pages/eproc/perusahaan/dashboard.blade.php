@@ -46,18 +46,18 @@
             <tbody>
               <tr>
                 <th>No</th>
-                <th>Nama Panjang</th>
-                <th>Email</th>
-                <th>Level</th>
+                <th>Nama Pengadaan</th>
+                <th>HPS</th>
+                <th>Tanggal Akhir Pengadaan</th>
                 <th>Action</th>
               </tr>
               @foreach ($pengadaan as $id => $pengadaans)
                 @if($pengadaans->status_aktif == 1)
                 <tr>
                   <td>{{ $id+1 }}</td>
-                  <td>{{ $pengadaans->nama_pengadaan }}</td>
-                  <td>{{ $pengadaans->jenis_pengadaan }}</td>
-                  <td>{{ $pengadaans->hps }}</td>
+                  <td>{{ $pengadaans->barangs->nama_barang }}</td>
+                  <td>{{ 'Rp. '.strrev(implode('.',str_split(strrev(strval($pengadaans->barangs->hps)),3))) }}</td>
+                  <td>{{ $pengadaans->barangs->tanggal_akhir_pengadaan }}</td>
                   <td>
                     <a href="{{ route('eproc.perusahaan.detail-pengadaan', ['id' => $pengadaans->id]) }}">Lihat</a>
                   </td>

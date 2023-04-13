@@ -8,10 +8,6 @@
 </div>
 @endsection
 @section('content')
-<h2 class="section-title">Keterangan</h2>
-<p class="section-lead">
-  Label merah menandakan Admin, Label biru berarti menandakan Creator sedangkan untuk label berwarna kuning menandakan Helpdesk
-</p>
 <div class="row">
   <div class="col-12">
     

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->string('jenis_barang');
             $table->integer('hps');
+            $table->date('tanggal_mulai_pengadaan');
+            $table->date('tanggal_akhir_pengadaan');
             $table->string('status_aktif')->default(1);
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

@@ -8,10 +8,6 @@
 </div>
 @endsection
 @section('content')
-<h2 class="section-title">Keterangan</h2>
-<p class="section-lead">
-  Label merah menandakan Admin, Label biru berarti menandakan Creator sedangkan untuk label berwarna kuning menandakan Helpdesk
-</p>
 <div class="row">
   <div class="col-12">
     
@@ -28,14 +24,6 @@
         <h4>Pengadaan</h4>
       </div>
       <div class="card-body">
-        <div class="float-left">
-          @if(auth()->user()->level == 1)
-          <a href="{{ route('eproc.superadmin.barang.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-          @endif
-          @if(auth()->user()->level == 2)
-          <a href="{{ route('eproc.admin.barang.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-          @endif
-        </div>
         <div class="float-right">
           <form>
             <div class="input-group">
@@ -54,18 +42,18 @@
             <tbody>
               <tr>
                 <th>No</th>
-                <th>Nama Panjang</th>
-                <th>Email</th>
-                <th>Level</th>
+                <th>Nama Pengadaan</th>
+                <th>HPS</th>
+                <th>Tanggal Akhir Pengadaan</th>
                 <th>Action</th>
               </tr>
               @foreach ($pengadaan as $id => $pengadaans)
                 @if($pengadaans->status_aktif == 1)
                 <tr>
                   <td>{{ $id+1 }}</td>
-                  <td>{{ $pengadaans->nama_pengadaan }}</td>
-                  <td>{{ $pengadaans->jenis_pengadaan }}</td>
-                  <td>{{ $pengadaans->hps }}</td>
+                  <td>{{ $pengadaans->barangs->nama_barang }}</td>
+                  <td>{{ 'Rp. '.strrev(implode('.',str_split(strrev(strval($pengadaans->barangs->hps)),3))) }}</td>
+                  <td>{{ $pengadaans->barangs->tanggal_akhir_pengadaan }}</td>
                   <td>
                     @if(auth()->user()->level == 1)
                     <a href="{{ route('eproc.superadmin.detail-pengadaan', ['id' => $pengadaans->id]) }}">Lihat</a>

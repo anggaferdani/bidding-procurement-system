@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\HistoryPengadaan;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -46,5 +47,9 @@ class User extends Authenticatable
         static::saving(function($model){
             $model->updated_by = Auth::id();
         });
+    }
+
+    public function history_pengadaans(){
+        return $this->hasMany(HistoryPengadaan::class);
     }
 }

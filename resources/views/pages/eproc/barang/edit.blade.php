@@ -16,39 +16,47 @@
       </div>
       <div class="card-body">
         @if(auth()->user()->level == 1)
-        <form method="POST" action="{{ route('eproc.superadmin.barang.store') }}" class="needs-validation" novalidate="">
+        <form method="POST" action="{{ route('eproc.superadmin.barang.update', $data->id) }}" class="needs-validation" novalidate="">
         @endif
         @if(auth()->user()->level == 2)
-        <form method="POST" action="{{ route('eproc.admin.barang.store') }}" class="needs-validation" novalidate="">
+        <form method="POST" action="{{ route('eproc.admin.barang.update', $data->id) }}" class="needs-validation" novalidate="">
         @endif
           @csrf
+          @method('PUT')
           <div class="form-group">
             <label for="">Nama Pengadaan</label>
-            <input id="" type="text" class="form-control" name="nama_barang" tabindex="1">
+            <input id="" type="text" class="form-control" name="nama_barang" value="{{ $data->nama_barang }}" tabindex="1">
             @error('nama_barang')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label>Jenis Pengadaan</label>
             <select class="form-control" name="jenis_barang">
-              <option disabled selected>Pilih</option>
-              <option value="Gedung">Gedung</option>
-              <option value="Sarana Prasarana">Sarana Prasarana</option>
+              <option value="Gedung" @if($data->jenis_barang === 'Gedung') selected="selected" @endif>Gedung</option>
+              <option value="Sarana Prasarana" @if($data->jenis_barang === 'Sarana Prasarana') selected="selected" @endif>Sarana Prasarana</option>
             </select>
           </div>
           <div class="form-group">
             <label for="">HPS</label>
-            <input id="" type="number" class="form-control" name="hps" tabindex="1">
+            <input id="" type="number" class="form-control" name="hps" value="{{ $data->hps }}" tabindex="1">
             @error('hps')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label for="">Tanggal Mulai Pengadaan</label>
-            <input id="" type="date" class="form-control" name="tanggal_mulai_pengadaan" tabindex="1">
+            <input id="" type="date" class="form-control" name="tanggal_mulai_pengadaan" value="{{ $data->tanggal_mulai_pengadaan }}" tabindex="1">
             @error('tanggal_mulai_pengadaan')<div class="text-danger">{{ $message }}</div>@enderror
           </div>
           <div class="form-group">
             <label for="">Tanggal Akhir Pengadaan</label>
-            <input id="" type="date" class="form-control" name="tanggal_akhir_pengadaan" tabindex="1">
+            <input id="" type="date" class="form-control" name="tanggal_akhir_pengadaan" value="{{ $data->tanggal_akhir_pengadaan }}" tabindex="1">
             @error('tanggal_akhir_pengadaan')<div class="text-danger">{{ $message }}</div>@enderror
+          </div>
+          <div class="form-group">
+            <label>Status Pengadaan</label>
+            <select class="form-control" name="status_pengadaan">
+              <option value="1" @if($data->status_pengadaan === '1') selected="selected" @endif>Buka</option>
+              <option value="2" @if($data->status_pengadaan === '2') selected="selected" @endif>Tutup Sementara</option>
+              <option value="3" @if($data->status_pengadaan === '3') selected="selected" @endif>Tutup</option>
+            </select>
           </div>
           @if(auth()->user()->level == 1)
           <a href="{{ route('eproc.superadmin.barang.index') }}" class="btn btn-secondary">Back</a>

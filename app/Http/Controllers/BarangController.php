@@ -42,7 +42,7 @@ class BarangController extends Controller
     public function update($id, Request $request)
     {
         $this->barangService->handlePutUpdateBarang($id, $request);
-        return redirect()->route('admin.barang.get.index');
+        return redirect()->route('eproc.superadmin.akun.index');
     }
 
     public function destroy($id, Request $request)

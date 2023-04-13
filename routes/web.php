@@ -12,6 +12,7 @@ use App\Http\Controllers\JajaranDireksiController;
 use App\Http\Controllers\JajaranKomisarisController;
 use App\Http\Controllers\ProfilePerusahaanController;
 use App\Http\Controllers\Eproc\AkunController as EprocAkunController;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,34 +25,24 @@ use App\Http\Controllers\Eproc\AkunController as EprocAkunController;
 |
 */
 
-Route::middleware(['web'])->group(function(){
-  Route::prefix('eproc')->name('eproc.')->group(function(){
+Route::prefix('eproc')->name('eproc.')->group(function(){
+  Route::middleware(['web'])->group(function(){
     Route::get('/login', [Controller::class, 'login'])->name('login');
     Route::post('/postlogin', [Controller::class, 'postlogin'])->name('postlogin');
     Route::get('/logout', [Controller::class, 'logout'])->name('logout');
   });
 
-  Route::prefix('compro')->name('compro.')->group(function(){
-    Route::get('/login', [ComproController::class, 'login'])->name('login');
-    Route::post('/postlogin', [ComproController::class, 'postlogin'])->name('postlogin');
-    Route::get('/register', [ComproController::class, 'register'])->name('register');
-    Route::post('/postregister', [ComproController::class, 'postregister'])->name('postregister');
-    Route::get('/logout', [ComproController::class, 'logout'])->name('logout');
-  });
-});
-
-
-Route::prefix('eproc')->name('eproc.')->group(function(){
   Route::prefix('superadmin')->name('superadmin.')->group(function(){
     Route::middleware(['auth:web', 'superadmin', 'disable_back_button'])->group(function(){
       Route::get('/dashboard', function(){return view('pages.eproc.superadmin.dashboard');})->name('dashboard');
       Route::resource('akun', EprocAkunController::class);
       Route::resource('berita', BeritaController::class);
       Route::get('export-berita', [BeritaController::class, 'export_berita'])->name('export-berita');
-        Route::post('import-berita', [BeritaController::class, 'import_berita'])->name('import-berita');
-        Route::get('cetak-pdf', [BeritaController::class, 'cetak_pdf'])->name('cetak-pdf');
-        Route::get('profile', [Controller::class, 'profile'])->name('profile');
-        Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      Route::post('import-berita', [BeritaController::class, 'import_berita'])->name('import-berita');
+      Route::get('cetak-pdf', [BeritaController::class, 'cetak_pdf'])->name('cetak-pdf');
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      Route::resource('barang', BarangController::class);
     });
   });
 
@@ -60,15 +51,24 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('/dashboard', function(){return view('pages.eproc.admin.dashboard');})->name('dashboard');
       Route::resource('berita', BeritaController::class);
       Route::get('export-berita', [BeritaController::class, 'export_berita'])->name('export-berita');
-        Route::post('import-berita', [BeritaController::class, 'import_berita'])->name('import-berita');
-        Route::get('cetak-pdf', [BeritaController::class, 'cetak_pdf'])->name('cetak-pdf');
-        Route::get('profile', [Controller::class, 'profile'])->name('profile');
-        Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      Route::post('import-berita', [BeritaController::class, 'import_berita'])->name('import-berita');
+      Route::get('cetak-pdf', [BeritaController::class, 'cetak_pdf'])->name('cetak-pdf');
+      Route::get('profile', [Controller::class, 'profile'])->name('profile');
+      Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
+      Route::resource('barang', BarangController::class);
     });
   });
 });
 
 Route::prefix('compro')->name('compro.')->group(function(){
+  Route::middleware(['web'])->group(function(){
+    Route::get('/login', [ComproController::class, 'login'])->name('login');
+    Route::post('/postlogin', [ComproController::class, 'postlogin'])->name('postlogin');
+    Route::get('/register', [ComproController::class, 'register'])->name('register');
+    Route::post('/postregister', [ComproController::class, 'postregister'])->name('postregister');
+    Route::get('/logout', [ComproController::class, 'logout'])->name('logout');
+  });
+
   Route::prefix('superadmin')->name('superadmin.')->group(function(){
       Route::middleware(['auth:web', 'superadmin', 'disable_back_button'])->group(function(){
         Route::get('/dashboard', function(){return view('pages.compro.superadmin.dashboard');})->name('dashboard');

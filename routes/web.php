@@ -3,16 +3,18 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ComproController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\PengadaanController;
+use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\Eproc\BeritaController;
 use App\Http\Controllers\JajaranDireksiController;
 use App\Http\Controllers\JajaranKomisarisController;
 use App\Http\Controllers\ProfilePerusahaanController;
 use App\Http\Controllers\Eproc\AkunController as EprocAkunController;
-use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,8 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
       Route::resource('barang', BarangController::class);
+      Route::get('/pengadaan', [PengadaanController::class, 'index'])->name('pengadaan');
+      Route::get('/pengadaan/{id}', [PengadaanController::class, 'detail_pengadaan'])->name('detail-pengadaan');
     });
   });
 
@@ -56,6 +60,16 @@ Route::prefix('eproc')->name('eproc.')->group(function(){
       Route::get('profile', [Controller::class, 'profile'])->name('profile');
       Route::put('postprofile', [Controller::class, 'postprofile'])->name('postprofile');
       Route::resource('barang', BarangController::class);
+      Route::get('/pengadaan', [PengadaanController::class, 'index'])->name('pengadaan');
+      Route::get('/pengadaan/{id}', [PengadaanController::class, 'detail_pengadaan'])->name('detail-pengadaan');
+    });
+  });
+
+  Route::prefix('perusahaan')->name('perusahaan.')->group(function(){
+    Route::middleware(['auth:web', 'disable_back_button'])->group(function(){
+      Route::get('dashboard', [PerusahaanController::class, 'dashboard'])->name('dashboard');
+      Route::get('/pengadaan/{id}', [PengadaanController::class, 'detail_pengadaan'])->name('detail-pengadaan');
+      Route::post('/bid/pengadaan/{id}', [PengadaanController::class, 'bid'])->name('bid');
     });
   });
 });

@@ -25,6 +25,20 @@ class DatabaseSeeder extends Seeder
             'level' => 1,
         ]);
 
+        User::create([
+            'nama_panjang' => 'perusahaan0001',
+            'email' => 'perusahaan0001@gmail.com',
+            'password' => bcrypt(12345678),
+            'level' => 'perusahaan',
+        ]);
+
+        User::create([
+            'nama_panjang' => 'perusahaan0002',
+            'email' => 'perusahaan0002@gmail.com',
+            'password' => bcrypt(12345678),
+            'level' => 'perusahaan',
+        ]);
+
         ProfilePerusahaan::create([
             'sejarah_perusahaan' => 'PT.SARANAWISESA PROPERINDO adalah anak perusahaan Perumda Pembangunan Sarana Jaya ( BUMD milik Pemerintah Provinsi DKI Jakarta ) berdiri sejak tanggal 3 Februari 1993 yang bergerak dibidang Property. Seiring dengan perkembangan perusahaan yang semakin pesat maka kami melakukan diversifikasi usaha dengan mengembangkan bisnis baru di bidang Sarana Parkir, Management Properti, Agen Properti, Supplier serta Interior & Landscape.',
             'visi' => 'Menjadi Perusahaan Pengembang yang Terkemuka dan Berkelanjutan di Indonesia',

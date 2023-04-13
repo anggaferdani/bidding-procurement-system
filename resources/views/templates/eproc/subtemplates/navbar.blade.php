@@ -194,18 +194,20 @@
       </div>
     </li>
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-      <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->nama_panjang }}</div></a>
+      <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->email }}</div></a>
       <div class="dropdown-menu dropdown-menu-right">
-        <div class="dropdown-title">Signed in as {{ auth()->user()->email }}</div>
+        <div class="dropdown-title">Signed in as {{ auth()->user()->nama_panjang }}</div>
         <div class="dropdown-divider"></div>
         @if(auth()->user()->level == 1)
           <a href="{{ route('eproc.superadmin.profile') }}" class="dropdown-item has-icon">
+            <i class="far fa-user"></i> Profile
+          </a>
         @endif
         @if(auth()->user()->level == 2)
           <a href="{{ route('eproc.admin.profile') }}" class="dropdown-item has-icon">
+            <i class="far fa-user"></i> Profile
+          </a>
         @endif
-          <i class="far fa-user"></i> Profile
-        </a>
         <a href="{{ route('eproc.logout') }}" class="dropdown-item has-icon text-danger">
           <i class="fas fa-sign-out-alt"></i> Logout
         </a>

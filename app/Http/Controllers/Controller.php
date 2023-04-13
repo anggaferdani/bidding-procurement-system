@@ -73,6 +73,8 @@ class Controller extends BaseController
                     return redirect()->route('eproc.superadmin.dashboard');
                 }elseif(auth()->user()->level == 2){
                     return redirect()->route('eproc.admin.dashboard');
+                }elseif(auth()->user()->level == 'perusahaan'){
+                    return redirect()->route('eproc.perusahaan.dashboard');
                 }else{
                     return redirect()->route('eproc.login')->with('fail', 'Bisa ditindak lanjuti sesuai level akun.');
                 }

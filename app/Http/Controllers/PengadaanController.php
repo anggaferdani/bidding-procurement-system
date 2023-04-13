@@ -21,13 +21,13 @@ class PengadaanController extends Controller
         ]);
     }
 
-    public function detailPengadaan($id)
+    public function detail_pengadaan($id)
     {
         $historyPengadaan = $this->pengadaanService->handleGetHistoryPengadaan($id);
         $pengadaan = $this->pengadaanService->handleGetPengadaan($id);
         return view('pages.eproc.pengadaan.detail-pengadaan', [
             'pengadaan' => $pengadaan,
-            'historyPengadaan' => $historyPengadaan,
+            'history_pengadaan' => $historyPengadaan,
         ]);
     }
 

@@ -1,10 +1,10 @@
 @extends('templates.eproc.pages')
 @section('title')
 @section('header')
-<h1>Management Pengadaan</h1>
+<h1>Pengadaan</h1>
 <div class="section-header-breadcrumb">
   <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
-  <div class="breadcrumb-item active"><a href="#">Management Pengadaan</a></div>
+  <div class="breadcrumb-item active"><a href="#">Pengadaan</a></div>
 </div>
 @endsection
 @section('content')
@@ -25,7 +25,7 @@
 
     <div class="card">
       <div class="card-header">
-        <h4>Management Pengadaan</h4>
+        <h4>Pengadaan</h4>
       </div>
       <div class="card-body">
         <div class="float-left">
@@ -59,31 +59,22 @@
                 <th>Level</th>
                 <th>Action</th>
               </tr>
-              @foreach ($barang as $id => $barangs)
-                @if($barangs->status_aktif == 1)
+              @foreach ($pengadaan as $id => $pengadaans)
+                @if($pengadaans->status_aktif == 1)
                 <tr>
                   <td>{{ $id+1 }}</td>
-                  <td>{{ $barangs->nama_barang }}</td>
-                  <td>{{ $barangs->jenis_barang }}</td>
-                  <td>{{ $barangs->hps }}</td>
+                  <td>{{ $pengadaans->nama_pengadaan }}</td>
+                  <td>{{ $pengadaans->jenis_pengadaan }}</td>
+                  <td>{{ $pengadaans->hps }}</td>
                   <td>
                     @if(auth()->user()->level == 1)
-                      <form action="{{ route('eproc.superadmin.barang.destroy', $barangs->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <a href="{{ route('eproc.superadmin.barang.show', $barangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                        <a href="{{ route('eproc.superadmin.barang.edit', $barangs->id) }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
-                        <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
-                      </form>
+                    <a href="{{ route('eproc.superadmin.detail-pengadaan', ['id' => $pengadaans->id]) }}">Lihat</a>
                     @endif
                     @if(auth()->user()->level == 2)
-                      <form action="{{ route('eproc.admin.barang.destroy', $barangs->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <a href="{{ route('eproc.admin.barang.show', $barangs->id) }}" class="btn btn-icon btn-primary"><i class="fas fa-info-circle"></i></a>
-                        <a href="{{ route('eproc.admin.barang.edit', $barangs->id) }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
-                        <button type="submit" class="btn btn-icon btn-danger"><i class="fa fa-trash"></i></button>
-                      </form>
+                    <a href="{{ route('eproc.admin.detail-pengadaan', ['id' => $pengadaans->id]) }}">Lihat</a>
+                    @endif
+                    @if(auth()->user()->level == 'perusahaan')
+                    <a href="{{ route('eproc.perusahaan.detail-pengadaan', ['id' => $pengadaans->id]) }}">Lihat</a>
                     @endif
                   </td>
                 </tr>

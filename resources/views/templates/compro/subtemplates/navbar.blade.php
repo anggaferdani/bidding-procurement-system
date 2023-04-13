@@ -194,23 +194,29 @@
       </div>
     </li>
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-      <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->nama_panjang }}</div></a>
+      <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->email }}</div></a>
       <div class="dropdown-menu dropdown-menu-right">
-        <div class="dropdown-title">Signed in as {{ auth()->user()->email }}</div>
+        <div class="dropdown-title">Signed in as {{ auth()->user()->nama_panjang }}</div>
         @if(auth()->user()->level == 1)
           <a href="{{ route('compro.superadmin.profile') }}" class="dropdown-item has-icon">
+            <i class="far fa-user"></i> Profile
+          </a>
         @endif
         @if(auth()->user()->level == 2)
           <a href="{{ route('compro.admin.profile') }}" class="dropdown-item has-icon">
+            <i class="far fa-user"></i> Profile
+          </a>
         @endif
         @if(auth()->user()->level == 3)
           <a href="{{ route('compro.creator.profile') }}" class="dropdown-item has-icon">
+            <i class="far fa-user"></i> Profile
+          </a>
         @endif
         @if(auth()->user()->level == 4)
           <a href="{{ route('compro.helpdesk.profile') }}" class="dropdown-item has-icon">
+            <i class="far fa-user"></i> Profile
+          </a>
         @endif
-          <i class="far fa-user"></i> Profile
-        </a>
         <div class="dropdown-divider"></div>
         <a href="{{ route('compro.logout') }}" class="dropdown-item has-icon text-danger">
           <i class="fas fa-sign-out-alt"></i> Logout
